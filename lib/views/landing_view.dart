@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:reminder_app/utilities/colors.dart';
+import 'package:reminder_app/widgets/task_list.dart';
 
 class LandingView extends StatefulWidget {
   @override
@@ -13,7 +14,7 @@ class _LandingViewState extends State<LandingView> {
       backgroundColor: darkerColor,
       body: SafeArea(
         child: Column(
-          
+          children: [Flexible(child: TaskList())],
         ),
       ),
     );

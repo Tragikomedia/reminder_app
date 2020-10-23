@@ -18,13 +18,17 @@ class _TaskListState extends State<TaskList> {
         name: 'Lel',
         number: 1,
         start: DateTime(2020, 10, 23, 18, 2),
-        end: DateTime(2020, 10, 23, 18, 50, 24))
+        end: DateTime(2020, 10, 23, 19, 50, 24))
   ];
 
   @override
   Widget build(BuildContext context) {
     return ListView.builder(
+      padding: const EdgeInsets.symmetric(vertical: 10.0),
         itemCount: testList.length,
-        itemBuilder: (context, index) => TaskTile(task: testList[index]));
+        itemBuilder: (context, index) => Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: TaskTile(task: testList[index]),
+        ));
   }
 }

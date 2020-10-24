@@ -5,14 +5,15 @@ class MyText extends StatelessWidget {
   final String text;
   final Color color;
   final double size;
+  final bool softWrap;
 
-  MyText({@required this.text, this.color=secondaryColor, this.size=12});
+  MyText({@required this.text, this.softWrap=false, this.color=secondaryColor, this.size=12});
 
   @override
   Widget build(BuildContext context) {
     return Text(
       text,
-      softWrap: false,
+      softWrap: softWrap,
       style: TextStyle(
         color: color,
         fontSize: size,

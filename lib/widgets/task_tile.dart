@@ -91,28 +91,30 @@ class _TaskTileState extends State<TaskTile> {
       ),
       child: Padding(
         padding: const EdgeInsets.all(8.0),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Flexible(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  MyText(text: widget.task.name, size: 26, color: primaryColor,),
-                  SizedBox(
-                    height: 10,
-                  ),
-                  MyText(text: "START: " + widget.task.start.hour.toString() +
-                    ":" + widget.task.start.minute.toString().padLeft(2, '0'), size: 15,),
-                  MyText(text: "END: " + widget.task.end.hour.toString() +
-                      ":" + widget.task.end.minute.toString().padLeft(2, '0'), size: 15,),
-                ],
+            MyText(text: widget.task.name, size: 26, color: secondaryColor, softWrap: true,),
+            Divider(color: secondaryColor,),
+            Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Flexible(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    MyText(text: "START: " + widget.task.start.hour.toString() +
+                      ":" + widget.task.start.minute.toString().padLeft(2, '0'), size: 15,),
+                    MyText(text: "END: " + widget.task.end.hour.toString() +
+                        ":" + widget.task.end.minute.toString().padLeft(2, '0'), size: 15,),
+                  ],
+                ),
               ),
-            ),
-            MyText(text: _timeToBeShown, color: primaryColor, size: 40),
-            SizedBox(width: 10,),
-            DiscardButton(isDone: _isDone)
-          ],
+              MyText(text: _timeToBeShown, color: primaryColor, size: 40),
+              SizedBox(width: 10,),
+              DiscardButton(isDone: _isDone, task: widget.task,)
+            ],
+          )],
         ),
       ),
     );

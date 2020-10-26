@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:reminder_app/models/task.dart';
 
 class TaskProvider extends ChangeNotifier {
+  int lastNumber = 0;
   List<Task> _taskList = [
     Task(
         name: 'I cóż, że ze Szwecji Litwini wracają',
@@ -32,6 +33,11 @@ class TaskProvider extends ChangeNotifier {
   void removeAllTasks() {
     _taskList.clear();
     notifyListeners();
+  }
+
+  int getNumber() {
+    lastNumber++;
+    return lastNumber - 1;
   }
 
   void addTask(Task task) {

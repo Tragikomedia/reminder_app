@@ -12,6 +12,25 @@ class Task {
   duration = end.difference(start),
   now = DateTime.now();
 
+  Map<String, dynamic> toMap() {
+    Map<String, dynamic> map = {
+      'name' : name,
+      'number' : number,
+      'start' : start.toString(),
+      'end' : end.toString(),
+    };
+    return map;
+  }
+
+  static Task fromMap(Map<String, dynamic> map) {
+    return Task(
+      name: map['name'],
+      number: map['number'],
+      start: DateTime.parse(map['start']),
+      end: DateTime.parse(map['end'])
+    );
+  }
+
   Duration getDuration() {
     return start.difference(now).isNegative ? end.difference(now) : duration;
   }

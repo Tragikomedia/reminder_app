@@ -16,7 +16,7 @@ class AddCancelButtons extends StatelessWidget {
           Navigator.pop(context);
         }),
         BarButton(text: 'ADD', onPressed: addTask)
-      ],
+    ],
     );
   }
 }

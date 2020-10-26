@@ -65,20 +65,36 @@ class _TaskTileState extends State<TaskTile> {
     return (_getTextFromTime(hours, TimeDiv.hour) + _getTextFromTime(minutes, TimeDiv.minute) + _getTextFromTime(seconds, TimeDiv.second));
   }
 
-  @override
-  void initState() {
+  _prepareTimers() {
     _duration = widget.task.getDuration();
     _timeInSec = widget.task.getTimeInSec();
     _timeToBeShown = _convertTickToText(0);
     _timerToStart = Timer(widget.task.getTimeToStart(), _startActualTimers);
+  }
+
+  _cancelTimers() {
+    _timerToStart?.cancel();
+    _updatingTimer?.cancel();
+    _generalTimer?.cancel();
+  }
+
+  @override
+  void initState() {
+    _prepareTimers();
     super.initState();
+  }
+
+  // didUpdateWidget is necessary to ensure timers won't mix while adding & deleting
+@override
+  void didUpdateWidget(covariant TaskTile oldWidget) {
+  _cancelTimers();
+  _prepareTimers();
+    super.didUpdateWidget(oldWidget);
   }
 
   @override
   void dispose() {
-    _timerToStart?.cancel();
-    _updatingTimer?.cancel();
-    _generalTimer?.cancel();
+    _cancelTimers();
     super.dispose();
   }
 

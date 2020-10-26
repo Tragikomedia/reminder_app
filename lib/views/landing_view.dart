@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:reminder_app/handlers/db_handler.dart';
 import 'package:reminder_app/utilities/colors.dart';
 import 'package:reminder_app/widgets/bottom_bar.dart';
 import 'package:reminder_app/widgets/my_text.dart';

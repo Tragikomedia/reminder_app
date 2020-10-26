@@ -1,20 +1,10 @@
 import 'package:flutter/cupertino.dart';
+import 'package:reminder_app/handlers/db_handler.dart';
 import 'package:reminder_app/models/task.dart';
 
 class TaskProvider extends ChangeNotifier {
   int lastNumber = 0;
-  List<Task> _taskList = [
-    Task(
-        name: 'I cóż, że ze Szwecji Litwini wracają',
-        number: 0,
-        start: DateTime(2020, 10, 24, 10, 10),
-        end: DateTime(2020, 10, 24, 12, 50)),
-    Task(
-        name: 'Lel',
-        number: 1,
-        start: DateTime(2020, 10, 24, 18, 2),
-        end: DateTime(2020, 10, 24, 19, 50, 24)),
-  ];
+  List<Task> _taskList = [];
 
 
   int get listLength {
@@ -25,12 +15,22 @@ class TaskProvider extends ChangeNotifier {
     return _taskList[index];
   }
 
+  Future<void> fillTaskList() async {
+    if (_taskList.isEmpty) {
+      List<Map<String, dynamic>> data = await DB.query('tasks');
+      data.forEach((map) => _taskList.add(Task.fromMap(map)));
+    }
+    return;
+  }
+
   void removeTask(Task task) {
+    DB.delete('tasks', task);
     _taskList.remove(task);
     notifyListeners();
   }
 
   void removeAllTasks() {
+    DB.clearDB();
     _taskList.clear();
     notifyListeners();
   }
@@ -41,6 +41,7 @@ class TaskProvider extends ChangeNotifier {
   }
 
   void addTask(Task task) {
+    DB.insert('tasks', task);
     _taskList.add(task);
     notifyListeners();
   }

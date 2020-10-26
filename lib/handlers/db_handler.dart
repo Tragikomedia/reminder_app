@@ -19,6 +19,12 @@ abstract class DB {
     }
   }
 
+  static void clearDB() async {
+    await _db.execute('DROP TABLE tasks');
+    await _db.execute(
+        'CREATE TABLE tasks (number INTEGER, name STRING, start STRING, end STRING)');
+  }
+
   static void onCreate(Database db, int version) async => await db.execute(
       'CREATE TABLE tasks (number INTEGER, name STRING, start STRING, end STRING)');
 

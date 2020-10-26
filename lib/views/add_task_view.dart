@@ -4,9 +4,6 @@ import 'package:reminder_app/models/task.dart';
 import 'package:reminder_app/provider/task_provider.dart';
 import 'package:reminder_app/utilities/colors.dart';
 import 'package:reminder_app/widgets/add_cancel_buttons.dart';
-import 'package:reminder_app/widgets/bar_button.dart';
-import 'package:reminder_app/widgets/bottom_bar.dart';
-import 'package:reminder_app/widgets/button_row.dart';
 import 'package:reminder_app/widgets/my_text.dart';
 import 'package:reminder_app/widgets/pick_date_box.dart';
 import 'package:reminder_app/widgets/task_name_box.dart';
@@ -29,20 +26,18 @@ class _AddTaskViewState extends State<AddTaskView> {
       DateTime end =
           DateTime(now.year, now.month, now.day, endTime.hour, endTime.minute);
       if (now.isAfter(start.add(Duration(minutes: 5)))) {
-        start.add(Duration(days: 1));
+        start = start.add(Duration(days: 1));
       }
       while (start.isAfter(end)) {
-        end.add(Duration(days: 1));
+        end = end.add(Duration(days: 1));
       }
       var provider = Provider.of<TaskProvider>(context, listen: false);
-      if (start != null && end != null) {
         int number = provider.getNumber();
         provider.addTask(Task(
             number: number,
             name: _controller.value.text,
             start: start,
             end: end));
-      }
     } else {
       throw Error();
     }

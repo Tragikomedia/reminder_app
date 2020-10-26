@@ -24,7 +24,7 @@ class Task {
 
   static Task fromMap(Map<String, dynamic> map) {
     return Task(
-      name: map['name'],
+      name: map['name'].toString(),
       number: map['number'],
       start: DateTime.parse(map['start']),
       end: DateTime.parse(map['end'])

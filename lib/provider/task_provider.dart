@@ -15,13 +15,31 @@ class TaskProvider extends ChangeNotifier {
     return _taskList[index];
   }
 
+  Future<void> init() async {
+    await fillTaskList();
+    sortTaskList();
+    lastNumber = getNumberFromDb();
+    return;
+  }
+
   Future<void> fillTaskList() async {
     if (_taskList.isEmpty) {
       List<Map<String, dynamic>> data = await DB.query('tasks');
       data.forEach((map) => _taskList.add(Task.fromMap(map)));
     }
-    return;
   }
+
+  void sortTaskList() {
+    _taskList.sort((a, b) => a.start.compareTo(b.start));
+  }
+
+  int getNumberFromDb() {
+   if (_taskList.isNotEmpty) {
+     return _taskList.reduce((a, b) => a.number > b.number ? a : b).number + 1;
+   }
+   return 0;
+}
+
 
   void removeTask(Task task) {
     DB.delete('tasks', task);
@@ -43,6 +61,7 @@ class TaskProvider extends ChangeNotifier {
   void addTask(Task task) {
     DB.insert('tasks', task);
     _taskList.add(task);
+    sortTaskList();
     notifyListeners();
   }
 }

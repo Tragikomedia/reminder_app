@@ -18,7 +18,7 @@ class _LoadingViewState extends State<LoadingView> {
   }
 
   _initialize(BuildContext context) async {
-    await Provider.of<TaskProvider>(context, listen: false).fillTaskList();
+    await Provider.of<TaskProvider>(context, listen: false).init();
     Navigator.pushAndRemoveUntil(
         context,
         MaterialPageRoute(builder: (context) => LandingView()),

@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:reminder_app/handlers/db_handler.dart';
 import 'package:reminder_app/models/task.dart';
 import 'package:reminder_app/handlers/notification_handler.dart';
+import 'package:workmanager/workmanager.dart';
 
 class TaskProvider extends ChangeNotifier {
   int lastNumber = 0;
@@ -42,12 +43,14 @@ class TaskProvider extends ChangeNotifier {
 
   void removeTask(Task task) {
     DB.delete('tasks', task);
+    Workmanager.cancelByTag('${task.name}_${task.number.toString()}');
     _taskList.remove(task);
     notifyListeners();
   }
 
   void removeAllTasks() {
     DB.clearDB();
+    Workmanager.cancelAll();
     _taskList.clear();
     notifyListeners();
   }

@@ -83,14 +83,6 @@ class _TaskTileState extends State<TaskTile> {
     super.initState();
   }
 
-  // didUpdateWidget is necessary to ensure timers won't mix while adding & deleting
-@override
-  void didUpdateWidget(covariant TaskTile oldWidget) {
-  _cancelTimers();
-  _prepareTimers();
-    super.didUpdateWidget(oldWidget);
-  }
-
   @override
   void dispose() {
     _cancelTimers();

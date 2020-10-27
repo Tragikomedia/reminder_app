@@ -8,7 +8,7 @@ class DiscardButton extends StatelessWidget {
   final Task task;
   final bool isDone;
 
-  DiscardButton({@required this.task, @required this.isDone});
+  DiscardButton({@required this.task,  this.isDone=false});
 
   @override
   Widget build(BuildContext context) {

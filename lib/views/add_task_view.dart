@@ -31,7 +31,7 @@ class _AddTaskViewState extends State<AddTaskView> {
         start = start.add(Duration(days: 1));
       }
       // Else if is used to avoid the notification being 0-60 seconds late
-      else if (now.difference(start).compareTo(Duration(seconds: 59)) < 0 && now.minute == start.minute) {
+      else if (now.difference(start).compareTo(Duration(seconds: 59)) < 0 && now.minute == start.minute && now.hour == start.hour) {
         start = start.add(now.difference(start));
       }
       while (start.isAfter(end)) {

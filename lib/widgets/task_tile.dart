@@ -1,5 +1,4 @@
 import 'dart:async';
-
 import 'package:flutter/material.dart';
 import 'package:reminder_app/models/task.dart';
 import 'package:reminder_app/utilities/colors.dart';
@@ -66,10 +65,10 @@ class _TaskTileState extends State<TaskTile> {
   }
 
   _prepareTimers() {
-    _duration = widget.task.getDuration();
-    _timeInSec = widget.task.getTimeInSec();
-    _timeToBeShown = _convertTickToText(0);
-    _timerToStart = Timer(widget.task.getTimeToStart(), _startActualTimers);
+      _duration = widget.task.getDuration();
+      _timeInSec = widget.task.getTimeInSec();
+      _timeToBeShown = _convertTickToText(0);
+      _timerToStart = Timer(widget.task.getTimeToStart(), _startActualTimers);
   }
 
   _cancelTimers() {

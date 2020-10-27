@@ -1,11 +1,11 @@
 import 'package:flutter/cupertino.dart';
 import 'package:reminder_app/handlers/db_handler.dart';
 import 'package:reminder_app/models/task.dart';
+import 'package:reminder_app/handlers/notification_handler.dart';
 
 class TaskProvider extends ChangeNotifier {
   int lastNumber = 0;
   List<Task> _taskList = [];
-
 
   int get listLength {
     return _taskList.length;
@@ -34,12 +34,11 @@ class TaskProvider extends ChangeNotifier {
   }
 
   int getNumberFromDb() {
-   if (_taskList.isNotEmpty) {
-     return _taskList.reduce((a, b) => a.number > b.number ? a : b).number + 1;
-   }
-   return 0;
-}
-
+    if (_taskList.isNotEmpty) {
+      return _taskList.reduce((a, b) => a.number > b.number ? a : b).number + 1;
+    }
+    return 0;
+  }
 
   void removeTask(Task task) {
     DB.delete('tasks', task);
@@ -61,6 +60,7 @@ class TaskProvider extends ChangeNotifier {
   void addTask(Task task) {
     DB.insert('tasks', task);
     _taskList.add(task);
+    registerTask(task);
     sortTaskList();
     notifyListeners();
   }

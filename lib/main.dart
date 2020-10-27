@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:reminder_app/provider/task_provider.dart';
-import 'package:reminder_app/views/landing_view.dart';
 import 'package:reminder_app/views/loading_view.dart';
-
+import 'package:workmanager/workmanager.dart';
 import 'handlers/db_handler.dart';
+import 'package:reminder_app/handlers/notification_handler.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();

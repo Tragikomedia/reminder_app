@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:reminder_app/handlers/notification_handler.dart';
 import 'package:reminder_app/models/task.dart';
 import 'package:reminder_app/provider/task_provider.dart';
 import 'package:reminder_app/utilities/colors.dart';
@@ -7,6 +8,7 @@ import 'package:reminder_app/widgets/add_cancel_buttons.dart';
 import 'package:reminder_app/widgets/my_text.dart';
 import 'package:reminder_app/widgets/pick_date_box.dart';
 import 'package:reminder_app/widgets/task_name_box.dart';
+import 'package:workmanager/workmanager.dart';
 
 class AddTaskView extends StatefulWidget {
   @override
@@ -14,7 +16,7 @@ class AddTaskView extends StatefulWidget {
 }
 
 class _AddTaskViewState extends State<AddTaskView> {
-  TextEditingController _controller = TextEditingController();
+  TextEditingController _controller;
   TimeOfDay startTime;
   TimeOfDay endTime;
 
@@ -27,6 +29,10 @@ class _AddTaskViewState extends State<AddTaskView> {
           DateTime(now.year, now.month, now.day, endTime.hour, endTime.minute);
       if (now.isAfter(start.add(Duration(minutes: 5)))) {
         start = start.add(Duration(days: 1));
+      }
+      // Else if is used to avoid the notification being 0-60 seconds late
+      else if (now.difference(start).compareTo(Duration(seconds: 59)) < 0 && now.minute == start.minute) {
+        start = start.add(now.difference(start));
       }
       while (start.isAfter(end)) {
         end = end.add(Duration(days: 1));
@@ -41,6 +47,19 @@ class _AddTaskViewState extends State<AddTaskView> {
     } else {
       throw Error();
     }
+  }
+
+  @override
+  void initState() {
+    Workmanager.initialize(callbackDispatcher);
+    _controller = TextEditingController();
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    _controller?.dispose();
+    super.dispose();
   }
 
   @override

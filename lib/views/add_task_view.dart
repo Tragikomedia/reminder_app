@@ -9,6 +9,7 @@ import 'package:reminder_app/widgets/my_text.dart';
 import 'package:reminder_app/widgets/pick_date_box.dart';
 import 'package:reminder_app/widgets/task_name_box.dart';
 import 'package:workmanager/workmanager.dart';
+import 'package:easy_localization/easy_localization.dart';
 
 class AddTaskView extends StatefulWidget {
   @override
@@ -70,7 +71,7 @@ class _AddTaskViewState extends State<AddTaskView> {
         child: Column(
           children: [
             MyText(
-              text: 'ADD TASK',
+              text: 'addtask'.tr(),
               color: primaryColor,
               size: 35.0,
             ),
@@ -79,7 +80,7 @@ class _AddTaskViewState extends State<AddTaskView> {
             ),
             TaskNameBox(controller: _controller),
             PickDateBox(
-                text: 'START',
+                text: 'start'.tr(),
                 onTap: () async {
                   TimeOfDay time = await showTimePicker(
                       context: context, initialTime: TimeOfDay.now());
@@ -89,7 +90,7 @@ class _AddTaskViewState extends State<AddTaskView> {
                 },
                 date: startTime != null ? startTime.format(context) : "--:--"),
             PickDateBox(
-                text: 'END',
+                text: 'end'.tr(),
                 onTap: () async {
                   TimeOfDay time = await showTimePicker(
                       context: context, initialTime: TimeOfDay.now());

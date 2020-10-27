@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:reminder_app/utilities/colors.dart';
 import 'package:reminder_app/widgets/my_text.dart';
+import 'package:easy_localization/easy_localization.dart';
 
 class TaskNameBox extends StatelessWidget {
   final TextEditingController controller;
@@ -11,7 +12,7 @@ class TaskNameBox extends StatelessWidget {
   Widget build(BuildContext context) {
     return Row(
       children: [
-        MyText(text: 'Task name: '),
+        MyText(text: 'name'.tr() + ': '),
         Expanded(
           child: TextField(
             controller: controller,

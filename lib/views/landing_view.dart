@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:reminder_app/handlers/db_handler.dart';
 import 'package:reminder_app/utilities/colors.dart';
 import 'package:reminder_app/widgets/bottom_bar.dart';
 import 'package:reminder_app/widgets/my_text.dart';
 import 'package:reminder_app/widgets/task_list.dart';
+import 'package:easy_localization/easy_localization.dart';
 
 class LandingView extends StatefulWidget {
   @override
@@ -20,7 +20,7 @@ class _LandingViewState extends State<LandingView> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            MyText(text: 'TASKS', color: primaryColor, size: 40.0,),
+            MyText(text: 'tasks'.tr(), color: primaryColor, size: 40.0,),
             Divider(color: secondaryColor,),
             Flexible(child: TaskList()),
             Divider(color: secondaryColor,),

@@ -1,0 +1,10 @@
+{
+  "tasks" : "TASKS",
+  "add" : "ADD",
+  "eraseall" : "ERASE ALL",
+  "start" : "START",
+  "end" : "END",
+  "addtask" : "ADD TASK",
+  "name" : "NAME",
+  "cancel" : "CANCEL"
+}

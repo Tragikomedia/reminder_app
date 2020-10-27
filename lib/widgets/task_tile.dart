@@ -6,6 +6,7 @@ import 'package:reminder_app/utilities/colors.dart';
 import 'package:reminder_app/widgets/discard_button.dart';
 import 'package:reminder_app/widgets/my_text.dart';
 import 'package:reminder_app/widgets/timer_display.dart';
+import 'package:easy_localization/easy_localization.dart';
 
 class TaskTile extends StatelessWidget {
   final int taskNumber;
@@ -36,13 +37,14 @@ class TaskTile extends StatelessWidget {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          MyText(text: "START: " + task.start.hour.toString() +
+                          MyText(text: "start".tr() + ": " + task.start.hour.toString() +
                               ":" + task.start.minute.toString().padLeft(2, '0'), size: 15,),
-                          MyText(text: "END: " + task.end.hour.toString() +
+                          MyText(text: "end".tr() + ": " + task.end.hour.toString() +
                               ":" + task.end.minute.toString().padLeft(2, '0'), size: 15,),
                         ],
                       ),
                     ),
+                    // Unique key is used so that state will update when task is added/deleted.
                     TimerDisplay(task: task, key: UniqueKey(),),
                     SizedBox(width: 10,),
                     DiscardButton(task: task,)

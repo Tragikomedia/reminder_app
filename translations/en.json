@@ -6,5 +6,10 @@
   "end" : "END",
   "addtask" : "ADD TASK",
   "name" : "NAME",
-  "cancel" : "CANCEL"
+  "cancel" : "CANCEL",
+  "done" : "DONE",
+  "input" : "Task name",
+  "messagetitle" : "Something happened!",
+  "messageoffset" : "It seems it is time for: ",
+  "messagenormal" : "Time's up! Activity: "
 }

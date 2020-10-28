@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:reminder_app/utilities/colors.dart';
+import 'package:reminder_app/utilities/consts.dart';
 import 'package:reminder_app/widgets/my_text.dart';
 
 class PickDateBox extends StatelessWidget {
@@ -12,19 +13,23 @@ class PickDateBox extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      mainAxisAlignment: MainAxisAlignment.end,
       children: [
-        MyText(text: text),
+        MyText(text: text, size: kAddLabelSize,),
         Spacer(),
         MyText(
           text: date,
+          size: kAddLabelSize,
         ),
-        Spacer(),
+        SizedBox(
+          width: 70,
+        ),
         GestureDetector(
           onTap: onTap,
           child: Icon(
             Icons.schedule,
-            color: secondaryColor,
+            color: primaryColor,
+            size: kAddLabelSize * 1.5,
           ),
         )
       ],

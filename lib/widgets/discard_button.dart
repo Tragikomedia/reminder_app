@@ -6,9 +6,10 @@ import 'package:provider/provider.dart';
 
 class DiscardButton extends StatelessWidget {
   final Task task;
-  final bool isDone;
 
-  DiscardButton({@required this.task,  this.isDone=false});
+  DiscardButton({
+    @required this.task,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -19,7 +20,7 @@ class DiscardButton extends StatelessWidget {
       child: Icon(
         Icons.highlight_off,
         size: 30.0,
-        color: isDone ? borderColor : Colors.red,
+        color: primaryColor,
       ),
     );
   }

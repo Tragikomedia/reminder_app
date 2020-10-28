@@ -4,7 +4,9 @@ import 'package:reminder_app/handlers/notification_handler.dart';
 import 'package:reminder_app/models/task.dart';
 import 'package:reminder_app/provider/task_provider.dart';
 import 'package:reminder_app/utilities/colors.dart';
+import 'package:reminder_app/utilities/consts.dart';
 import 'package:reminder_app/widgets/add_cancel_buttons.dart';
+import 'package:reminder_app/widgets/my_div.dart';
 import 'package:reminder_app/widgets/my_text.dart';
 import 'package:reminder_app/widgets/pick_date_box.dart';
 import 'package:reminder_app/widgets/task_name_box.dart';
@@ -32,19 +34,21 @@ class _AddTaskViewState extends State<AddTaskView> {
         start = start.add(Duration(days: 1));
       }
       // Else if is used to avoid the notification being 0-60 seconds late
-      else if (now.difference(start).compareTo(Duration(seconds: 59)) < 0 && now.minute == start.minute && now.hour == start.hour) {
+      else if (now.difference(start).compareTo(Duration(seconds: 59)) < 0 &&
+          now.minute == start.minute &&
+          now.hour == start.hour) {
         start = start.add(now.difference(start));
       }
       while (start.isAfter(end)) {
         end = end.add(Duration(days: 1));
       }
       var provider = Provider.of<TaskProvider>(context, listen: false);
-        int number = provider.getNumber();
-        provider.addTask(Task(
-            number: number,
-            name: _controller.value.text,
-            start: start,
-            end: end));
+      int number = provider.getNumber();
+      provider.addTask(Task(
+          number: number,
+          name: _controller.value.text,
+          start: start,
+          end: end));
     } else {
       throw Error();
     }
@@ -66,46 +70,64 @@ class _AddTaskViewState extends State<AddTaskView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: darkerColor,
-      body: SafeArea(
-        child: Column(
-          children: [
-            MyText(
-              text: 'addtask'.tr(),
-              color: primaryColor,
-              size: 35.0,
+      body: Container(
+        decoration: BoxDecoration(
+          gradient: LinearGradient(
+            begin: Alignment.topLeft,
+            end: Alignment.bottomRight,
+            colors: [lighterBackgroundColor, backgroundColor, darkerBackgroundColor],
+          )
+        ),
+        child: SafeArea(
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 8.0),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Spacer(flex:1),
+                MyDiv(),
+                MyText(
+                  text: 'addtask'.tr(),
+                  size: kTitleSize,
+                ),
+                MyDiv(),
+                Spacer(flex: 5,),
+                TaskNameBox(controller: _controller),
+                Spacer(flex: 1,),
+                MyDiv(),
+                PickDateBox(
+                    text: 'start'.tr(),
+                    onTap: () async {
+                      TimeOfDay time = await showTimePicker(
+                          context: context, initialTime: TimeOfDay.now());
+                      setState(() {
+                        startTime = time;
+                      });
+                    },
+                    date: startTime != null ? startTime.format(context) : "--:--"),
+                PickDateBox(
+                    text: 'end'.tr(),
+                    onTap: () async {
+                      TimeOfDay time = await showTimePicker(
+                          context: context, initialTime: TimeOfDay.now());
+                      setState(() {
+                        endTime = time;
+                      });
+                    },
+                    date: endTime != null ? endTime.format(context) : "--:--"),
+                MyDiv(),
+                Spacer(flex: 5,),
+                MyDiv(),
+                AddCancelButtons(
+                  addTask: () {
+                    _addTask(context);
+                    Navigator.pop(context);
+                  },
+                ),
+                Spacer(flex: 2),
+              ],
             ),
-            Divider(
-              color: secondaryColor,
-            ),
-            TaskNameBox(controller: _controller),
-            PickDateBox(
-                text: 'start'.tr(),
-                onTap: () async {
-                  TimeOfDay time = await showTimePicker(
-                      context: context, initialTime: TimeOfDay.now());
-                  setState(() {
-                    startTime = time;
-                  });
-                },
-                date: startTime != null ? startTime.format(context) : "--:--"),
-            PickDateBox(
-                text: 'end'.tr(),
-                onTap: () async {
-                  TimeOfDay time = await showTimePicker(
-                      context: context, initialTime: TimeOfDay.now());
-                  setState(() {
-                    endTime = time;
-                  });
-                },
-                date: endTime != null ? endTime.format(context) : "--:--"),
-            AddCancelButtons(
-              addTask: () {
-                _addTask(context);
-                Navigator.pop(context);
-              },
-            )
-          ],
+          ),
         ),
       ),
     );

@@ -12,10 +12,13 @@ class AddCancelButtons extends StatelessWidget {
   Widget build(BuildContext context) {
     return ButtonRow(
       buttons: [
+        Spacer(),
         BarButton(text: 'cancel'.tr(), onPressed: () {
           Navigator.pop(context);
         }),
-        BarButton(text: 'add'.tr(), onPressed: addTask)
+        Spacer(),
+        BarButton(text: 'add'.tr(), onPressed: addTask),
+        Spacer()
     ],
     );
   }

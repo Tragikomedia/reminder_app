@@ -8,17 +8,30 @@ class MyText extends StatelessWidget {
   final double size;
   final bool softWrap;
 
-  MyText({@required this.text, this.softWrap=false, this.color=secondaryColor, this.size=12});
+  MyText({@required this.text, this.softWrap=false, this.color=primaryColor, this.size=12});
 
   @override
   Widget build(BuildContext context) {
-    return Text(
-      text,
-      softWrap: softWrap,
-      style: TextStyle(
-        color: color,
-        fontSize: size,
+    return Stack(
+      children: [Text(
+        text,
+        softWrap: softWrap,
+        style: TextStyle(
+          fontSize: size,
+          foreground: Paint()
+            ..style = PaintingStyle.stroke
+            ..strokeWidth = 4
+            ..color = secondaryColor
+        ),
       ),
+      Text(
+        text,
+        softWrap: softWrap,
+        style: TextStyle(
+          fontSize: size,
+          color: color
+        ),
+      )]
     );
   }
 }

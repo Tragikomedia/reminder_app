@@ -6,5 +6,10 @@
   "end" : "KONIEC",
   "addtask" : "DODAJ ZADANIE",
   "name" : "NAZWA",
-  "cancel" : "ANULUJ"
+  "cancel" : "ANULUJ",
+  "done" : "ZROBIONE",
+  "input" : "Wprowadź nazwę",
+  "messagetitle" : "Coś się stało!",
+  "messageoffset" : "Już czas na: ",
+  "messagenormal" : "Koniec! Minął czas przeznaczony na: "
 }

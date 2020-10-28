@@ -1,6 +1,7 @@
 import 'package:reminder_app/models/task.dart';
 import 'package:workmanager/workmanager.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
+import 'package:easy_localization/easy_localization.dart';
 
 void callbackDispatcher() {
   Workmanager.executeTask((taskName, inputData) {
@@ -24,21 +25,34 @@ Future _showNotificationWithDefaultSound(
   var platformChannelSpecifics = NotificationDetails(
     android: androidPlatformChannelSpecifics,
   );
-  await notification.show(inputData['id'], 'Something happened!',
-      'Time to ${inputData['name']}', platformChannelSpecifics,
+  await notification.show(
+      inputData['id'],
+          inputData['title'],
+          inputData['message'] + inputData['name'],
+      platformChannelSpecifics,
       payload: 'Default_Sound');
 }
 
 void registerTask(Task task) {
   DateTime now = DateTime.now();
   String id = '${task.name}_${task.number.toString()}';
-  Map<String, dynamic> inputData = {'name': task.name, 'id': task.number};
+  String title = 'messagetitle'.tr();
+  Map<String, dynamic> inputData = {
+    'name': task.name,
+    'id': task.number,
+    'title' : title
+  };
+  String message;
   if (task.start.isAfter(now)) {
+    message = 'messageoffset'.tr();
+    inputData['message'] = message;
     Workmanager.registerOneOffTask('${id}_offset', '${task.name}_offset',
         tag: id,
         initialDelay: task.start.difference(now),
         inputData: inputData);
   }
+  message = 'messagenormal'.tr();
+  inputData['message'] = message;
   Workmanager.registerOneOffTask(id, task.name,
       tag: id, initialDelay: task.end.difference(now), inputData: inputData);
 }

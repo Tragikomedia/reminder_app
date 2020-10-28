@@ -67,6 +67,6 @@ class _TimerDisplayState extends State<TimerDisplay> {
 
   @override
   Widget build(BuildContext context) {
-    return MyText(text: _timeToBeShown, color: primaryColor, size: 40);
+    return MyText(text: _timeToBeShown, size: 40);
   }
 }

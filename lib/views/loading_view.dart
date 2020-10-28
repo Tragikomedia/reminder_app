@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:reminder_app/provider/task_provider.dart';
 import 'package:reminder_app/views/landing_view.dart';
+import 'package:easy_localization/easy_localization.dart';
 
 class LoadingView extends StatefulWidget {
   @override

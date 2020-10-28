@@ -25,7 +25,23 @@ class MyApp extends StatelessWidget {
           localizationsDelegates: context.localizationDelegates,
           supportedLocales: context.supportedLocales,
           locale: context.locale,
-          theme: ThemeData(fontFamily: "ProstoOne"),
+          theme: ThemeData(fontFamily: "ProstoOne",
+          cursorColor: Colors.red,
+          primarySwatch: Colors.red,
+          textTheme: TextTheme(
+
+          ),
+          textSelectionHandleColor: Colors.red,
+          timePickerTheme: TimePickerThemeData(
+            dialHandColor: Colors.red,
+            hourMinuteTextColor: Colors.red,
+              inputDecorationTheme: InputDecorationTheme(
+                focusedBorder: UnderlineInputBorder(
+                  borderSide: BorderSide(color: Colors.red)
+                )
+              ),
+              hourMinuteColor: Colors.redAccent.shade50
+          )),
           home: LoadingView(),
         ));
   }

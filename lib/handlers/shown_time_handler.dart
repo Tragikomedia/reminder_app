@@ -1,11 +1,7 @@
 import 'package:reminder_app/utilities/enums.dart';
-import 'package:easy_localization/easy_localization.dart';
 
 class ShownTimeHandler {
-  static String convertTickToText(bool isDone, int timeInSeconds, int counter) {
-    if (isDone) {
-      return "done".tr();
-    }
+  static String convertTickToText(int timeInSeconds, int counter) {
     int diffInSec = timeInSeconds - counter;
     int hours = diffInSec ~/ 3600;
     diffInSec -= hours * 3600;

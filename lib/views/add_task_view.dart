@@ -89,6 +89,7 @@ class _AddTaskViewState extends State<AddTaskView> {
                 MyText(
                   text: 'addtask'.tr(),
                   size: kTitleSize,
+                  softWrap: true,
                 ),
                 MyDiv(),
                 Spacer(flex: 5,),

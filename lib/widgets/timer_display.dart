@@ -2,8 +2,8 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:reminder_app/widgets/my_text.dart';
 import 'package:reminder_app/models/task.dart';
-import 'package:reminder_app/utilities/colors.dart';
 import 'package:reminder_app/handlers/shown_time_handler.dart';
+import 'package:easy_localization/easy_localization.dart';
 
 class TimerDisplay extends StatefulWidget {
   final UniqueKey key;
@@ -28,22 +28,25 @@ class _TimerDisplayState extends State<TimerDisplay> {
     _updatingTimer = Timer.periodic(Duration(seconds: 1), (timer) {
       setState(() {
         _timeToBeShown =
-            ShownTimeHandler.convertTickToText(_isDone, _timeInSec, timer.tick);
+            ShownTimeHandler.convertTickToText(_timeInSec, timer.tick);
       });
     });
     _generalTimer = Timer(_duration, () {
-      _updatingTimer.cancel();
       setState(() {
         _isDone = true;
       });
+      _updatingTimer.cancel();
     });
   }
 
   _prepareTimers() {
-    _duration = widget.task.getDuration();
-    _timeInSec = widget.task.getTimeInSec();
-    _timeToBeShown = ShownTimeHandler.convertTickToText(_isDone, _timeInSec, 0);
-    _timerToStart = Timer(widget.task.getTimeToStart(), _startActualTimers);
+    DateTime now = DateTime.now();
+    _duration = widget.task.getDuration(now);
+    _timeInSec = _duration.inSeconds;
+    _timeToBeShown = ShownTimeHandler.convertTickToText(_timeInSec, 0);
+    if (_generalTimer == null) {
+      _timerToStart = Timer(widget.task.getTimeToStart(now), _startActualTimers);
+    }
   }
 
   _cancelTimers() {
@@ -67,6 +70,6 @@ class _TimerDisplayState extends State<TimerDisplay> {
 
   @override
   Widget build(BuildContext context) {
-    return MyText(text: _timeToBeShown, size: 40);
+    return MyText(text: _isDone ? "done".tr() : _timeToBeShown, size: 40);
   }
 }

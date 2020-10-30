@@ -3,14 +3,12 @@ import 'package:flutter/cupertino.dart';
 class Task {
   String name;
   DateTime start;
-  DateTime now;
   DateTime end;
   Duration duration;
   int number;
 
   Task({@required this.name, @required this.start, @required this.end, @required this.number}):
-  duration = end.difference(start),
-  now = DateTime.now();
+  duration = end.difference(start);
 
   Map<String, dynamic> toMap() {
     Map<String, dynamic> map = {
@@ -31,17 +29,12 @@ class Task {
     );
   }
 
-  Duration getDuration() {
-    return start.difference(now).isNegative ? end.difference(now) : duration;
+  Duration getDuration(DateTime now) {
+    return now.isAfter(start) ? end.difference(now) : end.difference(start);
   }
 
-  Duration getTimeToStart() {
-    Duration toStart = start.difference(now);
-    return toStart.isNegative ? Duration(microseconds: 0) : toStart;
-  }
-
-  int getTimeInSec() {
-    return start.difference(now).isNegative ? end.difference(now).inSeconds :duration.inSeconds;
+  Duration getTimeToStart(DateTime now) {
+    return start.isAfter(now) ? start.difference(now) : Duration(seconds: 0);
   }
 
 }

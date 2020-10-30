@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:reminder_app/handlers/notification_handler.dart';
+import 'package:reminder_app/handlers/task_handler.dart';
 import 'package:reminder_app/models/task.dart';
 import 'package:reminder_app/provider/task_provider.dart';
 import 'package:reminder_app/utilities/colors.dart';
@@ -23,36 +24,6 @@ class _AddTaskViewState extends State<AddTaskView> {
   TimeOfDay startTime;
   TimeOfDay endTime;
 
-  _addTask(BuildContext context) {
-    if (startTime != null && endTime != null) {
-      DateTime now = DateTime.now();
-      DateTime start = DateTime(
-          now.year, now.month, now.day, startTime.hour, startTime.minute);
-      DateTime end =
-          DateTime(now.year, now.month, now.day, endTime.hour, endTime.minute);
-      if (now.isAfter(start.add(Duration(minutes: 5)))) {
-        start = start.add(Duration(days: 1));
-      }
-      // Else if is used to avoid the notification being 0-60 seconds late
-      else if (now.difference(start).compareTo(Duration(seconds: 59)) < 0 &&
-          now.minute == start.minute &&
-          now.hour == start.hour) {
-        start = start.add(now.difference(start));
-      }
-      while (start.isAfter(end)) {
-        end = end.add(Duration(days: 1));
-      }
-      var provider = Provider.of<TaskProvider>(context, listen: false);
-      int number = provider.getNumber();
-      provider.addTask(Task(
-          number: number,
-          name: _controller.value.text,
-          start: start,
-          end: end));
-    } else {
-      throw Error();
-    }
-  }
 
   @override
   void initState() {
@@ -121,7 +92,7 @@ class _AddTaskViewState extends State<AddTaskView> {
                 MyDiv(),
                 AddCancelButtons(
                   addTask: () {
-                    _addTask(context);
+                    TaskHandler.addTask(startTime, endTime, _controller.value.text, Provider.of<TaskProvider>(context, listen: false));
                     Navigator.pop(context);
                   },
                 ),

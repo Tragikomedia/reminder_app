@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:reminder_app/utilities/colors.dart';
-import 'package:easy_localization/easy_localization.dart';
 
 class MyText extends StatelessWidget {
   final String text;

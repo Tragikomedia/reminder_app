@@ -7,7 +7,6 @@ import 'package:reminder_app/widgets/discard_button.dart';
 import 'package:reminder_app/widgets/my_text.dart';
 import 'package:reminder_app/widgets/timer_display.dart';
 import 'package:easy_localization/easy_localization.dart';
-
 import 'my_div.dart';
 
 class TaskTile extends StatelessWidget {

@@ -1,8 +1,5 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 import 'package:reminder_app/models/task.dart';
-import 'package:reminder_app/provider/task_provider.dart';
 
 abstract class TaskHandler {
   static void addTask(TimeOfDay startTime, TimeOfDay endTime, String taskName, var provider) {

@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:reminder_app/handlers/notification_handler.dart';
 import 'package:reminder_app/handlers/task_handler.dart';
-import 'package:reminder_app/models/task.dart';
 import 'package:reminder_app/provider/task_provider.dart';
 import 'package:reminder_app/utilities/colors.dart';
 import 'package:reminder_app/utilities/consts.dart';

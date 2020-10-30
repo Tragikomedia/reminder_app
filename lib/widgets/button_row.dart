@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:reminder_app/widgets/bar_button.dart';
 
 class ButtonRow extends StatelessWidget {
   final List<Widget> buttons;

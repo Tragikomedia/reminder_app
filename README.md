@@ -2,6 +2,9 @@
 
 A simple reminder app to notify the users that something has happened.
 
+## Screenshots
+<img src="https://user-images.githubusercontent.com/62154148/97778050-ccbc9780-1b74-11eb-8fa9-c8503328baaf.png" width=200 /> <img src="https://user-images.githubusercontent.com/62154148/97778053-cf1ef180-1b74-11eb-8dea-13fa3ac3b3e3.png" width=200 />
+
 ## How to run
 
 1. Clone or download this repository.
